@@ -10,6 +10,7 @@
  * For more info visit:  http://www.php.net/error_reporting
  *
  */
+  ini_set('display_errors', 'on'); // Added so that (M)AMP shows errors instead of blank pages
 	error_reporting(E_ALL);
 
 /*
