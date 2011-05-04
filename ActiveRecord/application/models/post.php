@@ -27,5 +27,36 @@ class Post extends CI_Model
     $this->db->insert('posts', $data);
   }
   
+  /**
+   * Finds a record by id
+   *
+   * @param string $id 
+   * @return array The post or NULL if not found
+   * @author Ian Murray
+   */
+  public function find($id)
+  {
+    $post = $this->db->where(array('id' => $id))
+                     ->limit('1')
+                     ->get('posts')
+                     ->result();
+    
+    return count($post) == 0 ? NULL : $post[0];
+  }
   
+  /**
+   * Updates a record with $id with $data
+   *
+   * @param string $id 
+   * @param string $data 
+   * @return void
+   * @author Ian Murray
+   */
+  public function update($id, $data)
+  {
+    // Update the updated_at field with the new date! :D
+    $data['updated_at'] = date('Y-m-d H:i:s');
+    $this->db->where(array('id' => $id))
+             ->update('posts', $data);
+  }
 }

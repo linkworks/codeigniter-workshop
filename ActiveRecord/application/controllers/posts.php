@@ -70,4 +70,39 @@ class Posts extends CI_Controller
       $this->load_view('posts/' . Posts::$forms_folder . 'create');
     }
   }
+  
+  /**
+   * Shows a form to update a post
+   *
+   * @param string $id 
+   * @return void
+   * @author Ian Murray
+   */
+  public function update($id)
+  {
+    if ($post = $this->post->find($id))
+    {
+      if ($this->input->post('submit'))
+      {
+        $this->post->update($id, array(
+          'title' => $this->input->post('title'),
+          'body'  => $this->input->post('body')
+        ));
+        
+        // Redirect to index
+        redirect('posts/index');
+      }
+      else
+      {
+        $this->load_view('posts/' . Posts::$forms_folder . 'update', array(
+          'post' => $post
+        ));
+      }
+    }
+    else
+    {
+      show_404(); // Shows a 404 page if the record doesn't exist
+    }
+  }
+  
 }
