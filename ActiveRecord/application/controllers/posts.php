@@ -105,4 +105,24 @@ class Posts extends CI_Controller
     }
   }
   
+  /**
+   * Deletes a record
+   *
+   * @param string $id 
+   * @return void
+   * @author Ian Murray
+   */
+  public function destroy($id)
+  {
+    if ($post = $this->post->find($id))
+    {
+      $this->post->destroy($id);
+      
+      redirect('posts/index');
+    }
+    else
+    {
+      show_404();
+    }
+  }
 }

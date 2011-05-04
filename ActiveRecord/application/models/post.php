@@ -59,4 +59,16 @@ class Post extends CI_Model
     $this->db->where(array('id' => $id))
              ->update('posts', $data);
   }
+  
+  /**
+   * Destroys a record from the database
+   *
+   * @param string $id 
+   * @return void
+   * @author Ian Murray
+   */
+  public function destroy($id)
+  {
+    $this->db->delete('posts', array('id' => $id));
+  }
 }
