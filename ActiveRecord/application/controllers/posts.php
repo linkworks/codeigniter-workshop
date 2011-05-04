@@ -46,5 +46,28 @@ class Posts extends CI_Controller
     ));
   }
   
-  
+  /**
+   * Shows the create post form
+   *
+   * @return void
+   * @author Ian Murray
+   */
+  public function create()
+  {
+    if ($this->input->post('submit')) // Simple way to detect if a form was submitted, checking the submit button.
+    {
+      // Skip validation for now. Create the post
+      $this->post->create(array(
+        'title' => $this->input->post('title'),
+        'body'  => $this->input->post('body')
+      ));
+      
+      redirect('posts/index'); // Redirect to index
+    }
+    else
+    {
+      // Nothing was submitted, show the form.
+      $this->load_view('posts/' . Posts::$forms_folder . 'create');
+    }
+  }
 }
